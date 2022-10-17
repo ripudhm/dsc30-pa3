@@ -13,43 +13,56 @@ public class ShareableRide implements RideScheduler{
     private ArrayList<String> assignments;
 
     public ShareableRide(){
-        /*TODO*/
+        this.vehicles = new ArrayList<>();
+        this.passengers = new ArrayList<>();
+        this.assignments = new ArrayList<>();
     }
 
 
     public ArrayList<Vehicle> getVehicles() {
-        /*TODO*/
-        return null;
+        return this.vehicles;
     }
 
 
     public ArrayList<Passenger> getPassengers() {
-        /*TODO*/
-        return null;
+        return this.passengers;
     }
 
 
     public boolean addPassenger(Passenger p) throws OperationDeniedException {
-        /*TODO*/
-        return false;
+        if (p instanceof ValuePassenger) {
+            if (!this.passengers.contains(p)) {
+                this.passengers.add(p);
+                return true;
+            }
+            return false;
+        }
+        throw new OperationDeniedException(DENIED_PASSENGER_GROUP);
     }
 
 
 
     public boolean addVehicle(Vehicle v) {
-        /*TODO*/
-        return false;
+        if (this.vehicles.contains(v)) {
+            return false;
+        }
+        this.vehicles.add(v);
+        return true;
     }
 
 
 
     public void assignPassengerToVehicle() throws OperationDeniedException {
-        /*TODO*/
+        if (this.passengers.size() > CARPOOL_LIMIT*this.vehicles.size()) {
+            throw new OperationDeniedException(INVALID_ACTION);
+        }
+        for (int i = 0; i <= CARPOOL_LIMIT; i++) {
+
+        }
     }
 
 
     public ArrayList<String> getRecords() {
-        /*TODO*/
-        return null;
+        return this.assignments;
     }
 }

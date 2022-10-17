@@ -57,19 +57,24 @@ public class StandardRide implements RideScheduler{
             if (p.passengerID == 0) {
                 staPass.add(p);
             }
-            valPass.add(p);
+            else {
+                valPass.add(p);
+            }
         }
 
         for (Vehicle v : this.vehicles) {
             if (v.vehicleID == 0) {
                 ecoVeh.add(v);
             }
-            preVeh.add(v);
+            else {
+                preVeh.add(v);
+            }
         }
         if (staPass.size() > ecoVeh.size()) {
             throw new OperationDeniedException(INVALID_ACTION);
         }
-        ArrayList<Passenger> passList = staPass;
+        ArrayList<Passenger> passList = new ArrayList<>();
+        passList.addAll(staPass);
         passList.addAll(valPass);
         ArrayList<Vehicle> vehList = ecoVeh;
         vehList.addAll(preVeh);
@@ -81,22 +86,24 @@ public class StandardRide implements RideScheduler{
 
 
     public ArrayList<String> getRecords() {
-        /*TODO*/
-        return null;
+        return this.assignments;
     }
 
     public static void main(String[] args) throws OperationDeniedException {
-        PremiumVehicle test = new PremiumVehicle("ferrari");
+        /**
+        EconomyVehicle test = new EconomyVehicle("ferrari");
         PremiumVehicle test2 = new PremiumVehicle("mercedes");
         PremiumVehicle test3 = new PremiumVehicle("audi");
         StandardRide testride = new StandardRide();
-        System.out.println(testride.addVehicle(test));
+        testride.addVehicle(test);
         testride.addVehicle(test2);
-        testride.addVehicle(test3);
-        System.out.println(testride.vehicles);
-        Arrays.sort();
+        //testride.addVehicle(test3);
         ValuePassenger subject = new ValuePassenger("Ken", "lol");
-        test.addPassengerToVehicle(subject);
-
+        StandardPassenger subject1 = new StandardPassenger("Lewis", "WDC7");
+        testride.addPassenger(subject);
+        testride.addPassenger(subject1);
+        testride.assignPassengerToVehicle();
+        System.out.println(testride.assignments);
+         */
     }
 }
