@@ -1,13 +1,13 @@
 /*
-  Name: Your Name
-  PID:  A12345678
+  Name: Ripudh Mylapur
+  PID:  A15853784
  */
 import java.time.LocalDate;
 import java.util.ArrayList;
 /**
- * TODO
- * @author TODO
- * @since  TODO
+ * Abstract Class Vehicle that defines the functionality of a vehicle
+ * @author Ripudh Mylapur
+ * @since  10/15/2022
  */
 
 public abstract class Vehicle {
@@ -19,8 +19,13 @@ public abstract class Vehicle {
     protected int vehicleID;
 
     public Vehicle(String VehicleName) {
+        if (VehicleName == null) {
+            throw new IllegalArgumentException();
+        }
         this.date = LocalDate.now();
-        /*TODO*/
+        this.vehicle = VehicleName;
+        this.currentPassengers = new ArrayList<Passenger>();
+        this.passengerNames = new ArrayList<String>();
     }
 
     public LocalDate getDate(){
@@ -28,22 +33,20 @@ public abstract class Vehicle {
     }
 
     public String getVehicleName(){
-        /*TODO*/
-        return null;
+        return this.vehicle;
     }
 
     public ArrayList<Passenger> getCurrentPassengers(){
-        /*TODO*/
-        return null;
+        return this.currentPassengers;
     }
 
     public Integer getVehicleID() {
-        /*TODO*/
-        return null;
+        return this.vehicleID;
     }
 
     public abstract boolean addPassengerToVehicle(Passenger p)
             throws OperationDeniedException;
 
     public abstract String getVehicleInfo();
+
 }

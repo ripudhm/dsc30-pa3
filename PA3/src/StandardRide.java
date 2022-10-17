@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class StandardRide implements RideScheduler{
 
@@ -10,40 +11,92 @@ public class StandardRide implements RideScheduler{
     private ArrayList<Passenger> passengers;
     private ArrayList<String> assignments;
 
-    public StandardRide(){
-        /*TODO*/
+    public StandardRide() {
+        this.vehicles = new ArrayList<>();
+        this.passengers = new ArrayList<>();
+        this.assignments = new ArrayList<>();
     }
 
 
     public ArrayList<Vehicle> getVehicles() {
-        /*TODO*/
-        return null;
+        return this.vehicles;
     }
 
 
     public ArrayList<Passenger> getPassengers() {
-        /*TODO*/
-        return null;
+        return this.passengers;
     }
 
 
     public boolean addPassenger(Passenger p) {
-        /*TODO*/
-        return false;
+        if (this.passengers.contains(p)) {
+            return false;
+        }
+        this.passengers.add(p);
+        return true;
     }
 
     public boolean addVehicle(Vehicle v) {
-        /*TODO*/
-        return false;
+        if (this.vehicles.contains(v)) {
+            return false;
+        }
+        this.vehicles.add(v);
+        return true;
     }
 
     public void assignPassengerToVehicle() throws OperationDeniedException {
-        /*TODO*/
+        if (this.vehicles.size() != this.passengers.size()) {
+            throw new OperationDeniedException(MISMATCH_MSG);
+        }
+        ArrayList<Passenger> staPass = new ArrayList<>();
+        ArrayList<Passenger> valPass = new ArrayList<>();
+        ArrayList<Vehicle> preVeh = new ArrayList<>();
+        ArrayList<Vehicle> ecoVeh = new ArrayList<>();
+
+        for (Passenger p : this.passengers) {
+            if (p.passengerID == 0) {
+                staPass.add(p);
+            }
+            valPass.add(p);
+        }
+
+        for (Vehicle v : this.vehicles) {
+            if (v.vehicleID == 0) {
+                ecoVeh.add(v);
+            }
+            preVeh.add(v);
+        }
+        if (staPass.size() > ecoVeh.size()) {
+            throw new OperationDeniedException(INVALID_ACTION);
+        }
+        ArrayList<Passenger> passList = staPass;
+        passList.addAll(valPass);
+        ArrayList<Vehicle> vehList = ecoVeh;
+        vehList.addAll(preVeh);
+        for (int i = 0; i < vehList.size(); i++) {
+            vehList.get(i).addPassengerToVehicle(passList.get(i));
+            this.assignments.add(vehList.get(i).getVehicleInfo());
+        }
     }
 
 
     public ArrayList<String> getRecords() {
         /*TODO*/
         return null;
+    }
+
+    public static void main(String[] args) throws OperationDeniedException {
+        PremiumVehicle test = new PremiumVehicle("ferrari");
+        PremiumVehicle test2 = new PremiumVehicle("mercedes");
+        PremiumVehicle test3 = new PremiumVehicle("audi");
+        StandardRide testride = new StandardRide();
+        System.out.println(testride.addVehicle(test));
+        testride.addVehicle(test2);
+        testride.addVehicle(test3);
+        System.out.println(testride.vehicles);
+        Arrays.sort();
+        ValuePassenger subject = new ValuePassenger("Ken", "lol");
+        test.addPassengerToVehicle(subject);
+
     }
 }

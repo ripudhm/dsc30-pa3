@@ -1,12 +1,12 @@
 /*
-  Name: Your Name
-  PID:  A12345678
+  Name: Ripudh Mylapur
+  PID:  A15853784
  */
 
 /**
- * TODO
- * @author TODO
- * @since  TODO
+ * Passenger class defines the functionality of a vehicle user
+ * @author Ripudh Mylapur
+ * @since  10/16/2022
  */
 public abstract class Passenger {
 
@@ -16,21 +16,26 @@ public abstract class Passenger {
     protected int passengerID;
 
     public Passenger(String username, String bio) {
-        /*TODO*/
+        if (username == null || bio == null) {
+            throw new IllegalArgumentException();
+        }
+        this.username = username;
+        this.bio = bio;
     }
 
     public void setBio(String newBio) {
-        /*TODO*/
+        if (newBio == null) {
+            throw new IllegalArgumentException();
+        }
+        this.bio = newBio;
     }
 
     public String displayBio() {
-        /*TODO*/
-        return null;
+        return this.bio;
     }
 
     public Integer getPassengerID() {
-        /*TODO*/
-        return null;
+        return this.passengerID;
     }
 
     public abstract String displayName();

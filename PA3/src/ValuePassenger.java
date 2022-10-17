@@ -1,12 +1,12 @@
 /*
-  Name: Your Name
-  PID:  A12345678
+  Name: Ripudh Mylapur
+  PID:  A15853784
  */
 
 /**
- * TODO
- * @author TODO
- * @since  TODO
+ * Value Passenger class extends the Passenger class and has more unique features
+ * @author Ripudh Mylapur
+ * @since  10/16/2022
  */
 public class ValuePassenger extends Passenger{
 
@@ -14,15 +14,17 @@ public class ValuePassenger extends Passenger{
     private String customTitle;
 
     public ValuePassenger(String username, String bio){
-        /*TODO*/
+        super(username, bio);
+        this.customTitle = "Value Passenger";
+        this.passengerID = 1;
     }
 
     public String displayName() {
-        /*TODO*/
-        return null;
+        return String.format("<%s> ", this.customTitle) + String.format("%s", this.username);
     }
 
     public void setCustomTitle(String newTitle) {
-        /*TODO*/
+        this.customTitle = newTitle;
+
     }
 }
