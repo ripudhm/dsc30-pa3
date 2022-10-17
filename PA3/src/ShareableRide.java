@@ -53,16 +53,40 @@ public class ShareableRide implements RideScheduler{
 
 
     public void assignPassengerToVehicle() throws OperationDeniedException {
-        if (this.passengers.size() > CARPOOL_LIMIT*this.vehicles.size()) {
+        if (this.passengers.size() > CARPOOL_LIMIT * this.vehicles.size()) {
             throw new OperationDeniedException(INVALID_ACTION);
         }
-        for (int i = 0; i <= CARPOOL_LIMIT; i++) {
-
+        int counter = 0;
+        for (int i = 0; i < this.passengers.size(); i++) {
+            System.out.println(i);
+            this.vehicles.get(counter).addPassengerToVehicle(this.passengers.get(i));
+            if (i == CARPOOL_LIMIT - 1) {
+                counter += 1;
+            }
+        }
+        for (int i = 0; i < this.vehicles.size(); i++) {
+            this.assignments.add(this.vehicles.get(i).getVehicleInfo());
         }
     }
 
 
     public ArrayList<String> getRecords() {
         return this.assignments;
+    }
+    public static void main(String[] args) throws OperationDeniedException {
+
+         EconomyVehicle test = new EconomyVehicle("ferrari");
+         PremiumVehicle test2 = new PremiumVehicle("mercedes");
+         PremiumVehicle test3 = new PremiumVehicle("audi");
+         ShareableRide testride = new ShareableRide();
+         testride.addVehicle(test);
+         testride.addVehicle(test2);
+         //testride.addVehicle(test3);
+         ValuePassenger subject = new ValuePassenger("Ken", "lol");
+         ValuePassenger subject1 = new ValuePassenger("Lewis", "WDC7");
+         testride.addPassenger(subject);
+         testride.addPassenger(subject1);
+         testride.assignPassengerToVehicle();
+         System.out.println(testride.assignments);
     }
 }
