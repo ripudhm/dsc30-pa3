@@ -77,14 +77,14 @@ public class ShareableRide implements RideScheduler{
         if (this.passengers.size() > CARPOOL_LIMIT * this.vehicles.size()) {
             throw new OperationDeniedException(INVALID_ACTION);
         }
-        int counter = 0;
-        for (int i = 0; i < this.passengers.size(); i++) {
+        int counter = 0; // counter to move to the next vehicle
+        for (int i = 0; i < this.passengers.size(); i++) { // Assigning the passengers to vehicles
             this.vehicles.get(counter).addPassengerToVehicle(this.passengers.get(i));
-            if (i == CARPOOL_LIMIT - 1) {
+            if (i == CARPOOL_LIMIT - 1) { // checking if vehicle is full
                 counter += 1;
             }
         }
-        for (int i = 0; i < this.vehicles.size(); i++) {
+        for (int i = 0; i < this.vehicles.size(); i++) { // Adding assignments to the record
             this.assignments.add(this.vehicles.get(i).getVehicleInfo());
         }
     }

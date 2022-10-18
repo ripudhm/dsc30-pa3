@@ -70,12 +70,12 @@ public class StandardRide implements RideScheduler{
         if (this.vehicles.size() != this.passengers.size()) {
             throw new OperationDeniedException(MISMATCH_MSG);
         }
-        ArrayList<Passenger> staPass = new ArrayList<>();
-        ArrayList<Passenger> valPass = new ArrayList<>();
-        ArrayList<Vehicle> preVeh = new ArrayList<>();
-        ArrayList<Vehicle> ecoVeh = new ArrayList<>();
+        ArrayList<Passenger> staPass = new ArrayList<>(); //making a new list with only Standard Passengers
+        ArrayList<Passenger> valPass = new ArrayList<>(); //making a new list with only Value Passengers
+        ArrayList<Vehicle> preVeh = new ArrayList<>(); //making a new list with only Premium Vehicles
+        ArrayList<Vehicle> ecoVeh = new ArrayList<>(); //making a new list with only Economy Vehicles
 
-        for (Passenger p : this.passengers) {
+        for (Passenger p : this.passengers) { //looping to sort passengers
             if (p.passengerID == 0) {
                 staPass.add(p);
             }
@@ -84,7 +84,7 @@ public class StandardRide implements RideScheduler{
             }
         }
 
-        for (Vehicle v : this.vehicles) {
+        for (Vehicle v : this.vehicles) {//looping to sort vehicles
             if (v.vehicleID == 0) {
                 ecoVeh.add(v);
             }
@@ -95,12 +95,12 @@ public class StandardRide implements RideScheduler{
         if (staPass.size() > ecoVeh.size()) {
             throw new OperationDeniedException(INVALID_ACTION);
         }
-        ArrayList<Passenger> passList = new ArrayList<>();
+        ArrayList<Passenger> passList = new ArrayList<>(); //joining both lists to make sorted Passenger list
         passList.addAll(staPass);
         passList.addAll(valPass);
-        ArrayList<Vehicle> vehList = ecoVeh;
+        ArrayList<Vehicle> vehList = ecoVeh; //joining both lists to make sorted Vehicle list
         vehList.addAll(preVeh);
-        for (int i = 0; i < vehList.size(); i++) {
+        for (int i = 0; i < vehList.size(); i++) { // Assigning the passengers to vehicles
             vehList.get(i).addPassengerToVehicle(passList.get(i));
             this.assignments.add(vehList.get(i).getVehicleInfo());
         }
