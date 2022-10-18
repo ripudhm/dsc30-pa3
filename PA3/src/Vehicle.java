@@ -28,15 +28,15 @@ public abstract class Vehicle {
         this.passengerNames = new ArrayList<String>();
     }
 
-    public LocalDate getDate(){
+    public LocalDate getDate() {
         return this.date;
     }
 
-    public String getVehicleName(){
+    public String getVehicleName() {
         return this.vehicle;
     }
 
-    public ArrayList<Passenger> getCurrentPassengers(){
+    public ArrayList<Passenger> getCurrentPassengers() {
         return this.currentPassengers;
     }
 

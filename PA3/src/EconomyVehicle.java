@@ -5,7 +5,7 @@ import java.util.ArrayList;
  * @author Ripudh Mylapur
  * @since  10/15/2022
  */
-public class EconomyVehicle extends Vehicle{
+public class EconomyVehicle extends Vehicle {
 
     public EconomyVehicle(String VehicleName) {
         super(VehicleName);
@@ -13,7 +13,7 @@ public class EconomyVehicle extends Vehicle{
     }
 
 
-    public boolean addPassengerToVehicle(Passenger p){
+    public boolean addPassengerToVehicle(Passenger p) {
         if (this.currentPassengers.contains(p)) {
             return false;
         }
@@ -23,12 +23,12 @@ public class EconomyVehicle extends Vehicle{
 
     // civic [2022-10-08]: [Steven]
     public String getVehicleInfo() {
-        String name = String.format("%s ",this.getVehicleName());
+        String name = String.format("%s ", this.getVehicleName());
         ArrayList<String> passNames = new ArrayList<String>();
         for (Passenger p: this.currentPassengers) {
             passNames.add(p.username);
         }
-        return name + String.format("[%s]",this.getDate()) + ": " + String.format("%s",passNames);
+        return name + String.format("[%s]", this.getDate()) + ": " + String.format("%s", passNames);
     }
     public static void main(String[] args) {
         EconomyVehicle test = new EconomyVehicle("ferrari");

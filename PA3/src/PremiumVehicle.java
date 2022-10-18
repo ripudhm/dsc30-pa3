@@ -6,7 +6,7 @@ import java.util.Arrays;
  * @author Ripudh Mylapur
  * @since  10/15/2022
  */
-public class PremiumVehicle extends Vehicle{
+public class PremiumVehicle extends Vehicle {
 
     // Error message to use in OperationDeniedException
     private static final String INVALID_INPUT =
@@ -18,10 +18,14 @@ public class PremiumVehicle extends Vehicle{
 
     public PremiumVehicle(String VehicleName) throws OperationDeniedException {
         super(VehicleName);
-        if (!Arrays.asList(PREMIUM_VEHICLE_BRAND).contains(this.getVehicleName())) {
-            throw new OperationDeniedException(INVALID_INPUT);
+        String lowerName = this.getVehicleName().toLowerCase();
+        for (String make : PREMIUM_VEHICLE_BRAND) {
+            if (lowerName.contains(make)) {
+                this.vehicleID = 1;
+                return;
+            }
         }
-        this.vehicleID = 1;
+        throw new OperationDeniedException(INVALID_INPUT);
     }
 
     public boolean addPassengerToVehicle(Passenger p)
@@ -38,15 +42,15 @@ public class PremiumVehicle extends Vehicle{
 
     // bmw01 (Premium) [2022-10-08]: [<Value Passenger> Yunyi]
     public String getVehicleInfo() {
-        String name = String.format("%s ",this.getVehicleName());
+        String name = String.format("%s ", this.getVehicleName());
         ArrayList<String> passNames = new ArrayList<String>();
         for (Passenger p: this.currentPassengers) {
             passNames.add(p.displayName());
         }
-        return name + "(Premium) " + String.format("[%s]",this.getDate()) + ": " + String.format("%s",passNames);
+        return name + "(Premium) " + String.format("[%s]", this.getDate()) + ": " + String.format("%s", passNames);
     }
     public static void main(String[] args) throws OperationDeniedException {
-        PremiumVehicle test = new PremiumVehicle("ferrari");
+        PremiumVehicle test = new PremiumVehicle("ferrari01");
         ValuePassenger subject = new ValuePassenger("Ken", "lol");
         test.addPassengerToVehicle(subject);
         System.out.println(test.getVehicleInfo());
