@@ -11,23 +11,36 @@ public class StandardRide implements RideScheduler{
     private ArrayList<Passenger> passengers;
     private ArrayList<String> assignments;
 
+    /*
+    Initializes a Standard ride class with the vehicles, passengers and the assignments
+    */
     public StandardRide() {
         this.vehicles = new ArrayList<>();
         this.passengers = new ArrayList<>();
         this.assignments = new ArrayList<>();
     }
 
-
+    /*
+    Gets the list of vehicles in the ride
+    @return returns the list of vehicles
+    */
     public ArrayList<Vehicle> getVehicles() {
         return this.vehicles;
     }
 
-
+    /*
+    Gets the list of passengers in the ride
+    @return returns the list of passengers
+    */
     public ArrayList<Passenger> getPassengers() {
         return this.passengers;
     }
 
-
+    /*
+    Adds the input passenger to the list of passengers in the ride
+    @param p input passenger that needs to be added
+    @return true if successful or false if already in the list
+    */
     public boolean addPassenger(Passenger p) {
         if (this.passengers.contains(p)) {
             return false;
@@ -36,6 +49,11 @@ public class StandardRide implements RideScheduler{
         return true;
     }
 
+    /*
+    Adds the input vehicle to the list of vehicles in the ride
+    @param v input vehicle that needs to be added
+    @return true if successful or false if already in the list
+    */
     public boolean addVehicle(Vehicle v) {
         if (this.vehicles.contains(v)) {
             return false;
@@ -44,6 +62,10 @@ public class StandardRide implements RideScheduler{
         return true;
     }
 
+    /*
+    Assigns passengers to the vehicles based on passenger and vehicle rules
+    @throw OperationDeniedException if there is a mismatch in the number of vehicles and passengers
+    */
     public void assignPassengerToVehicle() throws OperationDeniedException {
         if (this.vehicles.size() != this.passengers.size()) {
             throw new OperationDeniedException(MISMATCH_MSG);
@@ -84,7 +106,10 @@ public class StandardRide implements RideScheduler{
         }
     }
 
-
+    /*
+    Gets the record of previous assignments
+    @return the list of assignments
+    */
     public ArrayList<String> getRecords() {
         return this.assignments;
     }
@@ -104,6 +129,6 @@ public class StandardRide implements RideScheduler{
         testride.addPassenger(subject1);
         testride.assignPassengerToVehicle();
         System.out.println(testride.assignments);
-         */
+        */
     }
 }

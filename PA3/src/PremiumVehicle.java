@@ -16,6 +16,11 @@ public class PremiumVehicle extends Vehicle {
     private static final String DENIED_PASSENGER_GROUP =
             "This operation is disabled in your passenger group.";
 
+    /*
+    Initializes a Premium vehicle and gives an ID number
+    @param takes in the name of the vehicle as a String
+    @throws OperationDeniedException when vehicle name is not a premium brand
+    */
     public PremiumVehicle(String VehicleName) throws OperationDeniedException {
         super(VehicleName);
         String lowerName = this.getVehicleName().toLowerCase();
@@ -28,6 +33,11 @@ public class PremiumVehicle extends Vehicle {
         throw new OperationDeniedException(INVALID_INPUT);
     }
 
+    /*
+    Adds input passenger into the vehicle
+    @param takes in the passenger who is going to be added to the vehicle
+    @throws OperationDeniedException when input passenger is not a Value Passenger
+    */
     public boolean addPassengerToVehicle(Passenger p)
             throws OperationDeniedException {
         if (p instanceof ValuePassenger) {
@@ -40,6 +50,10 @@ public class PremiumVehicle extends Vehicle {
         throw new OperationDeniedException(DENIED_PASSENGER_GROUP);
     }
 
+    /*
+    Gets the information about the vehicle
+    @return returns the information as a string
+    */
     // bmw01 (Premium) [2022-10-08]: [<Value Passenger> Yunyi]
     public String getVehicleInfo() {
         String name = String.format("%s ", this.getVehicleName());
@@ -50,9 +64,9 @@ public class PremiumVehicle extends Vehicle {
         return name + "(Premium) " + String.format("[%s]", this.getDate()) + ": " + String.format("%s", passNames);
     }
     public static void main(String[] args) throws OperationDeniedException {
-        PremiumVehicle test = new PremiumVehicle("ferrari01");
-        ValuePassenger subject = new ValuePassenger("Ken", "lol");
-        test.addPassengerToVehicle(subject);
-        System.out.println(test.getVehicleInfo());
+        //PremiumVehicle test = new PremiumVehicle("ferrari01");
+        //ValuePassenger subject = new ValuePassenger("Ken", "lol");
+        //test.addPassengerToVehicle(subject);
+        //System.out.println(test.getVehicleInfo());
     }
 }
